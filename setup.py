@@ -39,7 +39,7 @@ setup(
     platforms = ["any"],
     zip_safe=False,
 #    package_data = {'' : ['*.*']},
-    packages=['responseblock'],
+    packages=['proxyblock'],
     test_suite='nose.collector',
     include_package_data=True,
 
