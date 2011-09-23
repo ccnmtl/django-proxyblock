@@ -15,7 +15,7 @@ def all_pageblocks():
 
 class ProxyBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
-    proxied_block = models.ForeignKey(Question,related_name="proxied_block")
+    proxied_block = models.ForeignKey(PageBlock,related_name="proxied_block")
     display_name = "ProxyBlock"
     exportable = False
     importable = False
