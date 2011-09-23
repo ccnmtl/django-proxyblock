@@ -15,7 +15,7 @@ def all_pageblocks():
 
 class ProxyBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
-    proxied_block = models.ForeignKey(PageBlock,related_name="proxied_block")
+    proxied_block = models.ForeignKey(PageBlock,related_name="proxied_block",null=True)
     display_name = "ProxyBlock"
     exportable = False
     importable = False
@@ -50,7 +50,7 @@ class ProxyBlock(models.Model):
     @classmethod
     def create(self,request):
         proxied_block = PageBlock.objects.get(id=request.POST.get('proxied_block',''))
-        return ProxyBlock(proxied_block=proxied_block)
+        return ProxyBlock.objects.create(proxied_block=proxied_block)
 
     def edit(self,vals,files):
         proxied_block = PageBlock.objects.get(id=vals.get('proxied_block',''))
