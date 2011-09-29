@@ -26,6 +26,9 @@ class ProxyBlock(models.Model):
     def __unicode__(self):
         return unicode(self.pageblock())
 
+    def edit_label(self):
+        return "%s: %s" % (self.display_name,unicode(self.proxied_block))
+
     def edit_form(self):
         block_choices = [
             (b.id,"%s%s" % (b.section.get_absolute_url(),
@@ -33,8 +36,10 @@ class ProxyBlock(models.Model):
             for b in all_pageblocks()]
         class EditForm(forms.Form):
             proxied_block = forms.ChoiceField(label="Block to Proxy",
-                                              choices=block_choices)
-        return EditForm(instance=self)
+                                              choices=block_choices,
+                                              initial=self.proxied_block.id,
+                                              )
+        return EditForm()
 
     @classmethod
     def add_form(self):
