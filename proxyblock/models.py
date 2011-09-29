@@ -66,10 +66,18 @@ class ProxyBlock(models.Model):
     def render(self,**kwargs):
         return self.proxied_block.render()
 
-    def render_js(self,**kwargs):
+    @property
+    def js_template_file(self):
+        return self.proxied_block.js_template_file
+
+    @property
+    def css_template_file(self):
+        return self.proxied_block.css_template_file
+
+    def js_render(self,**kwargs):
         return self.proxied_block.render_js()
 
-    def render_css(self,**kwargs):
+    def css_render(self,**kwargs):
         return self.proxied_block.render_css()
 
         
