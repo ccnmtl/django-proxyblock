@@ -1,7 +1,7 @@
 from django.db import models
 from pagetree.models import PageBlock, Hierarchy, Section
 from django.contrib.auth.models import User
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericRelation
 from django import forms
 from datetime import datetime
 from django.core.urlresolvers import reverse
@@ -14,7 +14,7 @@ def all_pageblocks():
             yield p
 
 class ProxyBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+    pageblocks = GenericRelation(PageBlock)
     proxied_block = models.ForeignKey(PageBlock,related_name="proxied_block",null=True)
     display_name = "ProxyBlock"
     exportable = False
